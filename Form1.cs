@@ -5,7 +5,7 @@ using System;
 using System.Data.SqlTypes;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Data; // Ensure this namespace is included
+using System.Data; 
 namespace LTW_ContactApp
 {
 
@@ -13,9 +13,7 @@ namespace LTW_ContactApp
 
     {
 
-        string chuoiketnoi = @"Data Source=NamPNM;" +
-            "Initial Catalog=ContactData;" +
-            "User ID=sa;Password=123456;";
+        string chuoiketnoi = @"Data Source=NamPNM;Initial Catalog=ContactData;Integrated Security=True;";
 
         SqlCommand cmd;
         SqlDataAdapter adt;
@@ -82,7 +80,7 @@ namespace LTW_ContactApp
                         if (count == 1)
                         {
                             MessageBox.Show("Đăng nhập thành công!");
-                            pnContactList.BringToFront(); // Đưa người dùng vào trang chính
+                            pnContactList.BringToFront(); 
                         }
                         else
                         {
@@ -129,7 +127,7 @@ namespace LTW_ContactApp
                 {
                     conn.Open();
 
-                    // Kiểm tra xem tài khoản đã tồn tại chưa
+                  
                     string checkQuery = "SELECT COUNT(*) FROM TaiKhoan WHERE tentaikhoan = @username";
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
                     {
@@ -142,7 +140,7 @@ namespace LTW_ContactApp
                         }
                     }
 
-                    // Thêm tài khoản mới
+                  
                     string insertQuery = @"INSERT INTO TaiKhoan (tentaikhoan, email, sodienthoai, matkhau)
                                    VALUES (@username, @email, @phone, @password)";
                     using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
@@ -156,8 +154,8 @@ namespace LTW_ContactApp
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Đăng ký thành công!");
-                            // Đưa người dùng về trang đăng nhập (nếu có)
-                            pnDangNhap.BringToFront(); // thay đổi theo tên panel thực tế
+                           
+                            pnDangNhap.BringToFront(); 
                         }
                         else
                         {
